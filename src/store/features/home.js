@@ -1,18 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getGoodPriceList } from "@/api/home";
+
+export const fetchHomeList = createAsyncThunk("fetchData", async () => {
+  const res = await getGoodPriceList();
+  return res;
+});
 
 export const homeSlice = createSlice({
   name: "homeReducer",
   initialState: {
-    count: 1,
+    goodPriceInfo: {},
   },
   reducers: {
-    increment: (state, { payload }) => {
+    changeGoodPriceInfo: (state, { payload }) => {
       console.log(payload);
-      state.count = payload + state.count;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchHomeList.fulfilled, (state, action) => {
+      console.log("action", action.payload);
+      state.goodPriceInfo = action.payload;
+    });
   },
 });
 
-export const { increment } = homeSlice.actions;
+export const { changeGoodPriceInfo } = homeSlice.actions;
 
 export default homeSlice.reducer;

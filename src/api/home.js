@@ -1,5 +1,6 @@
 import request from "@/services/request";
 
-export const getHomeList = () => {
-  return request.get({ url: "/home/discount" });
+// 高分房源接口
+export const getGoodPriceList = () => {
+  return request.get({ url: "/home/highscore" });
 };
