@@ -67,7 +67,7 @@ const RoomItem = memo((props) => {
           </ItemWrapper>
         );
       })}
-      <WishModalWrapper title="为此心愿单命名" open={wishModelStatus} onCancel={handleCancel} footer={null} width={"567px"}>
+      <WishModalWrapper title="为此心愿单命名" open={wishModelStatus} onCancel={handleCancel} footer={null} width={"550px"}>
         <div className="content">
           <WishModalInputWrapper
             value={wishModelInput}
