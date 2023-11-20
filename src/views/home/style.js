@@ -6,5 +6,9 @@ export const HomeWrapper = styled.div`
   .content {
     width: calc(100% - 160px);
     margin: auto 80px;
+
+    .box {
+      margin-top: 30px;
+    }
   }
 `;

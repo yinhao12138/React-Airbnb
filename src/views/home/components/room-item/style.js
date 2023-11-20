@@ -25,6 +25,7 @@ export const ItemWrapper = styled.div`
 
       img {
         position: absolute;
+        z-index: -1;
         top: 0;
         left: 0;
         width: 100%;
@@ -33,6 +34,7 @@ export const ItemWrapper = styled.div`
 
       .icon {
         position: absolute;
+        z-index: -1;
         right: 10px;
         top: 10px;
         cursor: pointer;

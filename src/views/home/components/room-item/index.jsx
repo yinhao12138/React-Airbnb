@@ -58,7 +58,9 @@ const RoomItem = memo((props) => {
                   <div>
                     <IconStart></IconStart>
                   </div>
-                  <div className="number"> {item.star_rating}</div>
+                  <div className="number">
+                    {item.star_rating} ({item.reviews_count})
+                  </div>
                 </div>
               </div>
               <div className="name">{item.name}</div>

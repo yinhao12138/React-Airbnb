@@ -2,14 +2,17 @@ import React, { memo, useEffect } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import Banners from "./components/bannner";
 import { HomeWrapper } from "./style";
-import { fetchHomeList, changeGoodPriceInfo } from "@/store/features/home";
-import SectionHeader from "@/components/section-header";
-import RoomItem from "@/components/room-item";
+import { fetchDisCountHomeList, fetchPopularRecommendList, fetchHeightHomeList, fetchGoodHomeList, changeGoodPriceInfo } from "@/store/features/home";
+import SectionHeader from "./components/section-header";
+import RoomItem from "./components/room-item";
 
 const Home = memo(() => {
-  const { goodPriceInfo } = useSelector(
+  const { disCountInfo, popularRecommendInfo, goodPriceInfo, heightScoreInfo } = useSelector(
     (state) => ({
+      disCountInfo: state.home.disCountInfo,
+      popularRecommendInfo: state.home.popularRecommendInfo,
       goodPriceInfo: state.home.goodPriceInfo,
+      heightScoreInfo: state.home.heightScoreInfo,
     }),
     shallowEqual
   );
@@ -17,7 +20,10 @@ const Home = memo(() => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchHomeList());
+    dispatch(fetchDisCountHomeList());
+    dispatch(fetchPopularRecommendList());
+    dispatch(fetchGoodHomeList());
+    dispatch(fetchHeightHomeList());
 
     return () => {};
   }, [dispatch]);
@@ -26,8 +32,22 @@ const Home = memo(() => {
     <HomeWrapper>
       <Banners></Banners>
       <div className="content">
-        <SectionHeader title={goodPriceInfo.title} subtitle={goodPriceInfo.subtitle}></SectionHeader>
-        <RoomItem info={goodPriceInfo}></RoomItem>
+        {/* <div className="box">
+          <SectionHeader title={disCountInfo.title} subtitle={heightScoreInfo.subtitle}></SectionHeader>
+          <RoomItem info={disCountInfo}></RoomItem>
+        </div> */}
+        {/* <div className="box">
+          <SectionHeader title={goodPriceInfo.title}></SectionHeader>
+          <RoomItem info={goodPriceInfo}></RoomItem>
+        </div> */}
+        <div className="box">
+          <SectionHeader title={goodPriceInfo.title}></SectionHeader>
+          <RoomItem info={goodPriceInfo}></RoomItem>
+        </div>
+        <div className="box">
+          <SectionHeader title={heightScoreInfo.title} subtitle={heightScoreInfo.subtitle}></SectionHeader>
+          <RoomItem info={heightScoreInfo}></RoomItem>
+        </div>
       </div>
     </HomeWrapper>
   );
