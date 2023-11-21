@@ -9,10 +9,10 @@ const RoomItem = memo((props) => {
   const [wishModelInput, setWishModelInput] = useState("");
   const [WishModalDisabled, setWishModalDisabled] = useState(true);
 
-  const { info } = props;
+  const { list = [], width } = props;
 
   function goDetail(i) {
-    console.log(i);
+    // console.log(i);
   }
 
   function wishList(e, i) {
@@ -42,9 +42,9 @@ const RoomItem = memo((props) => {
 
   return (
     <RoomWrapper>
-      {info.list?.map((item) => {
+      {list.map((item) => {
         return (
-          <ItemWrapper key={item.id}>
+          <ItemWrapper key={item.id} width={width}>
             <div className="inner" onClick={() => goDetail(item)}>
               <div className="cover">
                 <img src={item.picture_url} alt="" />
@@ -88,7 +88,7 @@ const RoomItem = memo((props) => {
 });
 
 RoomItem.propTypes = {
-  info: PropTypes.object,
+  list: PropTypes.array,
 };
 
 export default RoomItem;

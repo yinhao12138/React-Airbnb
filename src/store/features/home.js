@@ -36,8 +36,8 @@ export const homeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchDisCountHomeList.fulfilled, (state, action) => {
-      // console.log("Discount", action.payload);
       state.disCountInfo = action.payload;
+      // console.log("Discount", state.disCountInfo);
     });
     builder.addCase(fetchPopularRecommendList.fulfilled, (state, action) => {
       // console.log("PopularInfo", action.payload);
@@ -45,6 +45,7 @@ export const homeSlice = createSlice({
     });
     builder.addCase(fetchGoodHomeList.fulfilled, (state, action) => {
       state.goodPriceInfo = action.payload;
+      // console.log(state.goodPriceInfo);
     });
     builder.addCase(fetchHeightHomeList.fulfilled, (state, action) => {
       state.heightScoreInfo = action.payload;
