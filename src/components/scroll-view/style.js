@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const ScrollViewWrapper = styled.div`
   position: relative;
+  margin-left: -80px;
 
   .control {
     position: absolute;
-    left: 0;
+    background-color: red;
+    left: 50px;
     height: 68px;
     width: 48px;
     top: 0;

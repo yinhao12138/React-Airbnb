@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getDisCountList, getPopularRecommendList, getGoodPriceList, getHeightScoreList } from "@/api/home";
+import { getDisCountList, getPopularRecommendList, getGoodPriceList, getHeightScoreList, getLongForList } from "@/api/home";
 
 export const fetchDisCountHomeList = createAsyncThunk("fetchDiscountData", async () => {
   const res = await getDisCountList();
@@ -21,6 +21,11 @@ export const fetchHeightHomeList = createAsyncThunk("fetchHeightData", async () 
   return res;
 });
 
+export const fetchLongForList = createAsyncThunk("fetchLongForData", async () => {
+  const res = await getLongForList();
+  return res;
+});
+
 export const homeSlice = createSlice({
   name: "homeReducer",
   initialState: {
@@ -28,6 +33,7 @@ export const homeSlice = createSlice({
     popularRecommendInfo: {},
     goodPriceInfo: {},
     heightScoreInfo: {},
+    longForInfo: {},
   },
   reducers: {
     changeGoodPriceInfo: (state, { payload }) => {
@@ -37,18 +43,18 @@ export const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchDisCountHomeList.fulfilled, (state, action) => {
       state.disCountInfo = action.payload;
-      // console.log("Discount", state.disCountInfo);
     });
     builder.addCase(fetchPopularRecommendList.fulfilled, (state, action) => {
-      // console.log("PopularInfo", action.payload);
       state.popularRecommendInfo = action.payload;
     });
     builder.addCase(fetchGoodHomeList.fulfilled, (state, action) => {
       state.goodPriceInfo = action.payload;
-      // console.log(state.goodPriceInfo);
     });
     builder.addCase(fetchHeightHomeList.fulfilled, (state, action) => {
       state.heightScoreInfo = action.payload;
+    });
+    builder.addCase(fetchLongForList.fulfilled, (state, action) => {
+      state.longForInfo = action.payload;
     });
   },
 });

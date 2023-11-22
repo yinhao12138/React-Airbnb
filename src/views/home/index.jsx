@@ -2,18 +2,27 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import Banners from "./components/bannner";
 import { HomeWrapper } from "./style";
-import { fetchDisCountHomeList, fetchPopularRecommendList, fetchHeightHomeList, fetchGoodHomeList, changeGoodPriceInfo } from "@/store/features/home";
+import {
+  fetchDisCountHomeList,
+  fetchPopularRecommendList,
+  fetchHeightHomeList,
+  fetchGoodHomeList,
+  fetchLongForList,
+  changeGoodPriceInfo,
+} from "@/store/features/home";
 import SectionHeader from "./components/section-header";
 import SectionTabsTabs from "./components/section-tabs";
 import RoomItem from "./components/room-item";
+import LongFor from "./components/long-for";
 
 const Home = memo(() => {
-  const { disCountInfo, popularRecommendInfo, goodPriceInfo, heightScoreInfo } = useSelector(
+  const { longForInfo, disCountInfo, popularRecommendInfo, goodPriceInfo, heightScoreInfo } = useSelector(
     (state) => ({
       disCountInfo: state.home.disCountInfo,
       popularRecommendInfo: state.home.popularRecommendInfo,
       goodPriceInfo: state.home.goodPriceInfo,
       heightScoreInfo: state.home.heightScoreInfo,
+      longForInfo: state.home.longForInfo,
     }),
     shallowEqual
   );
@@ -25,6 +34,7 @@ const Home = memo(() => {
     dispatch(fetchPopularRecommendList());
     dispatch(fetchGoodHomeList());
     dispatch(fetchHeightHomeList());
+    dispatch(fetchLongForList());
 
     return () => {};
   }, [dispatch]);
@@ -65,6 +75,10 @@ const Home = memo(() => {
           {!!popularRecommendInfo.dest_address?.length && (
             <RoomItem list={popularRecommendInfo.dest_list[popularName || getDefaultNames(popularRecommendInfo)]} width="33%"></RoomItem>
           )}
+        </div>
+        <div className="box">
+          <SectionHeader title={longForInfo.title} subtitle={longForInfo.subtitle}></SectionHeader>
+          {!!longForInfo.list?.length && <LongFor longForList={longForInfo.list}></LongFor>}
         </div>
         <div className="box">
           <SectionHeader title={goodPriceInfo.title}></SectionHeader>

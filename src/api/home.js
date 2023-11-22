@@ -19,3 +19,8 @@ export const getGoodPriceList = () => {
 export const getHeightScoreList = () => {
   return request.get({ url: "/home/highscore" });
 };
+
+// 想往城市接口
+export const getLongForList = () => {
+  return request.get({ url: "/home/longfor" });
+};

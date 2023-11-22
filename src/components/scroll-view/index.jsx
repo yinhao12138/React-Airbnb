@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { memo, useState, useRef, useEffect } from "react";
 import { ScrollViewWrapper } from "./style";
+// import classNames from "classnames";
 
 const ScrollView = memo((props) => {
   const [showRightBtn, setShowRightBtn] = useState(false);
@@ -29,10 +30,12 @@ const ScrollView = memo((props) => {
     setShowRightBtn(totalOffset > newElOffsetLeft); // 实现右侧按钮能否显示:一共可以滚动的长度减去本身占有的宽度等于可以偏移的宽度 偏移的宽度大于偏移的宽度则展示右边的按钮
     setShowLeftBtn(newElOffsetLeft > 0); // 实现左侧按钮能否显示:只要item有偏移量就展示 否则就隐藏
   }
+
   return (
+    //distance左侧按钮是否展示 展示不同样式
     <ScrollViewWrapper>
       {showLeftBtn && (
-        <div className="control left">
+        <div className=" control left">
           <span className="arrow" onClick={(e) => controlArrowBtn(false)}></span>
         </div>
       )}
@@ -54,6 +57,8 @@ const ScrollView = memo((props) => {
   );
 });
 
-ScrollView.propTypes = {};
+ScrollView.propTypes = {
+  handleListenBtnShow: PropTypes.func,
+};
 
 export default ScrollView;
