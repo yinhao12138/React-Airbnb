@@ -3,13 +3,14 @@ import React, { memo } from "react";
 import { PlusInfoWrapper } from "./style";
 import ScrollView from "@/components/scroll-view";
 import IconStart from "@/assets/svg/icon_start";
+import { useNavigate } from "react-router-dom";
 
 const PlusInfo = memo((props) => {
   const { plusInfoList } = props;
-  console.log("@@@", plusInfoList);
 
+  const navigate = useNavigate();
   function goDetail(i) {
-    console.log("i", i);
+    navigate("/entire");
   }
   return (
     <PlusInfoWrapper>

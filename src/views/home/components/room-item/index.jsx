@@ -3,6 +3,7 @@ import React, { memo, useState } from "react";
 import { RoomWrapper, ItemWrapper, WishModalWrapper, WishModalButtonWrapper, WishModalInputWrapper } from "./style";
 import IconLoveImage from "@/assets/svg/icon_love";
 import IconStart from "@/assets/svg/icon_start";
+import { useNavigate } from "react-router-dom";
 
 const RoomItem = memo((props) => {
   const [wishModelStatus, setWishModelStatus] = useState(false);
@@ -11,8 +12,11 @@ const RoomItem = memo((props) => {
 
   const { list = [], width } = props;
 
+  const navigate = useNavigate();
+
   function goDetail(i) {
     // console.log(i);
+    navigate("/entire");
   }
 
   function wishList(e, i) {
