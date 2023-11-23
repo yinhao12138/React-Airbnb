@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const FilterDateWrapper = styled.div`
-  width: calc(100% - 160px);
-  margin: auto 80px;
   display: flex;
+  /* position: fixed; */
 
   .item {
     cursor: pointer;
@@ -25,7 +24,7 @@ export const FilterDateWrapper = styled.div`
   }
 
   .checkBox {
-    background-color: pink;
+    background-color: red;
     color: white;
   }
 `;
