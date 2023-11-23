@@ -24,3 +24,8 @@ export const getHeightScoreList = () => {
 export const getLongForList = () => {
   return request.get({ url: "/home/longfor" });
 };
+
+// 想往城市接口
+export const getPlusInfoList = () => {
+  return request.get({ url: "/home/plus" });
+};

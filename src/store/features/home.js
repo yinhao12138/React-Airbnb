@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getDisCountList, getPopularRecommendList, getGoodPriceList, getHeightScoreList, getLongForList } from "@/api/home";
+import { getDisCountList, getPopularRecommendList, getGoodPriceList, getHeightScoreList, getLongForList, getPlusInfoList } from "@/api/home";
 
 export const fetchDisCountHomeList = createAsyncThunk("fetchDiscountData", async () => {
   const res = await getDisCountList();
@@ -26,6 +26,11 @@ export const fetchLongForList = createAsyncThunk("fetchLongForData", async () =>
   return res;
 });
 
+export const fetchPlusInfoList = createAsyncThunk("fetchPlusInfoData", async () => {
+  const res = await getPlusInfoList();
+  return res;
+});
+
 export const homeSlice = createSlice({
   name: "homeReducer",
   initialState: {
@@ -34,6 +39,7 @@ export const homeSlice = createSlice({
     goodPriceInfo: {},
     heightScoreInfo: {},
     longForInfo: {},
+    plusInfo: {},
   },
   reducers: {
     changeGoodPriceInfo: (state, { payload }) => {
@@ -55,6 +61,9 @@ export const homeSlice = createSlice({
     });
     builder.addCase(fetchLongForList.fulfilled, (state, action) => {
       state.longForInfo = action.payload;
+    });
+    builder.addCase(fetchPlusInfoList.fulfilled, (state, action) => {
+      state.plusInfo = action.payload;
     });
   },
 });

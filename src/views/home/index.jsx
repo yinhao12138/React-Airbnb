@@ -8,21 +8,24 @@ import {
   fetchHeightHomeList,
   fetchGoodHomeList,
   fetchLongForList,
+  fetchPlusInfoList,
   changeGoodPriceInfo,
 } from "@/store/features/home";
 import SectionHeader from "./components/section-header";
 import SectionTabsTabs from "./components/section-tabs";
 import RoomItem from "./components/room-item";
 import LongFor from "./components/long-for";
+import PlusInfo from "./components/plus-Info";
 
 const Home = memo(() => {
-  const { longForInfo, disCountInfo, popularRecommendInfo, goodPriceInfo, heightScoreInfo } = useSelector(
+  const { plusInfo, longForInfo, disCountInfo, popularRecommendInfo, goodPriceInfo, heightScoreInfo } = useSelector(
     (state) => ({
       disCountInfo: state.home.disCountInfo,
       popularRecommendInfo: state.home.popularRecommendInfo,
       goodPriceInfo: state.home.goodPriceInfo,
       heightScoreInfo: state.home.heightScoreInfo,
       longForInfo: state.home.longForInfo,
+      plusInfo: state.home.plusInfo,
     }),
     shallowEqual
   );
@@ -35,6 +38,7 @@ const Home = memo(() => {
     dispatch(fetchGoodHomeList());
     dispatch(fetchHeightHomeList());
     dispatch(fetchLongForList());
+    dispatch(fetchPlusInfoList());
 
     return () => {};
   }, [dispatch]);
@@ -87,6 +91,10 @@ const Home = memo(() => {
         <div className="box">
           <SectionHeader title={heightScoreInfo.title} subtitle={heightScoreInfo.subtitle}></SectionHeader>
           <RoomItem list={heightScoreInfo.list} width="20%"></RoomItem>
+        </div>
+        <div className="box">
+          <SectionHeader title={plusInfo.title} subtitle={plusInfo.subtitle}></SectionHeader>
+          {!!plusInfo.list?.length && <PlusInfo plusInfoList={plusInfo.list}></PlusInfo>}
         </div>
       </div>
     </HomeWrapper>
