@@ -11,14 +11,19 @@ export const entireSlice = createSlice({
   initialState: {
     entireList: [],
     total: 0,
+    loading: false,
   },
   reducers: {
     getBanners: (state, { payload }) => {},
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchEntireList.pending, (state, action) => {
+      state.loading = true;
+    });
     builder.addCase(fetchEntireList.fulfilled, (state, action) => {
       state.entireList = action.payload.list;
       state.total = action.payload.totalCount;
+      state.loading = false;
     });
   },
 });

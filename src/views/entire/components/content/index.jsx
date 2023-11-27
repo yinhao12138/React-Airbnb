@@ -5,7 +5,7 @@ import RoomItem from "@/components/room-item";
 
 const Content = memo((props) => {
   const { list } = props;
-  console.log("@@@", list);
+
   return (
     <ContentWrapper>
       <div className="top-box">
