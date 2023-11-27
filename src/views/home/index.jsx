@@ -13,7 +13,7 @@ import {
 } from "@/store/features/home";
 import SectionHeader from "./components/section-header";
 import SectionTabsTabs from "./components/section-tabs";
-import RoomItem from "./components/room-item";
+import RoomItem from "../../components/room-item";
 import LongFor from "./components/long-for";
 import PlusInfo from "./components/plus-Info";
 
@@ -49,7 +49,7 @@ const Home = memo(() => {
   const getDefaultNames = function (tabs) {
     return tabs.dest_address?.[0].name;
   };
-  const [disName, setDisName] = useState(""); //useState 只有第一次初始化值空的时候渲染才有效
+  const [disName, setDisName] = useState(""); //useState 只有第一次初li始化值空的时候渲染才有效
   const selectionDisTabsMethod = useCallback(function (n) {
     setDisName(n);
   }, []);

@@ -17,15 +17,20 @@ const Entire = memo(() => {
     };
   }, shallowEqual);
 
+  // console.log(entireList);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchEntireList({ offset: entireOffset, size: entireSize }));
+
+    return () => {};
   }, [dispatch]);
 
   return (
     <EntireWrapper>
       <FilterDate></FilterDate>
-      <Content></Content>
+      {!!entireList.length && <Content list={entireList}></Content>}
       <PagIng></PagIng>
     </EntireWrapper>
   );

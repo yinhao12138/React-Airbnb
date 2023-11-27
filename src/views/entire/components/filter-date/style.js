@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const FilterDateWrapper = styled.div`
+  width: 100%;
   display: flex;
-  /* position: fixed; */
+  position: fixed;
+  background-color: white;
+  z-index: 2;
+  height: 50px;
 
   .item {
     cursor: pointer;
