@@ -8,5 +8,5 @@ export const HeaderWrapper = styled.div`
   width: 100%;
   background-color: white;
   position: fixed;
-  z-index: 2; //解决脱离文本流图片优先级问题
+  z-index: 999; //解决脱离文本流图片优先级问题
 `;

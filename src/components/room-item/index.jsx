@@ -2,16 +2,20 @@ import PropTypes from "prop-types";
 import React, { memo, useState, useRef } from "react";
 import { Carousel } from "antd";
 import { RoomWrapper, ItemWrapper, WishModalWrapper, WishModalButtonWrapper, WishModalInputWrapper, CarouselWrapper } from "./style";
+import classNames from "classnames";
+
 import IconLoveImage from "@/assets/svg/icon_love";
 import IconStart from "@/assets/svg/icon_start";
 import { useNavigate } from "react-router-dom";
 import IconArrowLeft from "@/assets/svg/icon-arrow-left";
 import IconArrowRight from "@/assets/svg/icon-arrow-right";
+import Indicator from "../Indicator";
 
 const RoomItem = memo((props) => {
   const [wishModelStatus, setWishModelStatus] = useState(false);
   const [wishModelInput, setWishModelInput] = useState("");
   const [WishModalDisabled, setWishModalDisabled] = useState(true);
+  const [selectIndex, setSelectIndex] = useState(0);
 
   const { list = [], width } = props;
 
@@ -46,14 +50,57 @@ const RoomItem = memo((props) => {
   }
 
   const sliderRef = useRef(null);
-  function handleArrowMethod(e) {
-    // console.log(sliderRef.current.next);
-    console.log(sliderRef);
-    // sliderRef.current.next();
-    sliderRef.current.goTo(2, true);
+  function handleArrowMethod(isNext = true) {
+    isNext ? sliderRef.current.prev() : sliderRef.current.next();
 
-    // e ? sliderRef.current.prev() : sliderRef.current.next();
-    // sliderRef.current.prev();
+    let newIndex = isNext ? selectIndex + 1 : selectIndex - 1;
+    if (newIndex < 0) newIndex = list?.picture_urls?.length - 1;
+    if (newIndex > list?.picture_urls?.length - 1) newIndex = 0;
+    setSelectIndex(newIndex);
+  }
+
+  function silderComponent(l) {
+    return (
+      <div className="slider">
+        <div className="control">
+          <div className="arrowIcon left" onClick={() => handleArrowMethod(false)}>
+            <IconArrowLeft size={14}></IconArrowLeft>
+          </div>
+          <div className="arrowIcon right" onClick={() => handleArrowMethod(true)}>
+            <IconArrowRight size={14}></IconArrowRight>
+          </div>
+        </div>
+        <div className="indicator">
+          <Indicator selectIndex={selectIndex}>
+            {l.picture_urls.map((item, index) => {
+              return (
+                <div className="item" key={item}>
+                  <span className={classNames("dot", { active: selectIndex === index })}></span>
+                </div>
+              );
+            })}
+          </Indicator>
+        </div>
+        <Carousel dots={false} ref={sliderRef}>
+          {l.picture_urls.map((it, index) => (
+            <div className="cover" key={index}>
+              <img src={it} alt="" />
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    );
+  }
+
+  function defauleComponents(l) {
+    return (
+      <div className="cover">
+        <img src={l.picture_url} alt="" />
+        <div className="icon" onClick={(event) => wishList(event, l)}>
+          <IconLoveImage></IconLoveImage>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -62,32 +109,7 @@ const RoomItem = memo((props) => {
         return (
           <ItemWrapper key={item.id} width={width}>
             <div className="inner" onClick={() => goDetail(item)}>
-              {/* entire展示轮播图 */}
-              {!!item?.picture_urls?.length ? (
-                <div>
-                  <Carousel dots={false} ref={sliderRef}>
-                    {item.picture_urls.map((it, index) => (
-                      <div className="cover" key={index}>
-                        <div className="arrowIcon left" onClick={() => handleArrowMethod(true)}>
-                          <IconArrowLeft size={14}></IconArrowLeft>
-                        </div>
-                        <div className="arrowIcon right" onClick={() => handleArrowMethod(false)}>
-                          <IconArrowRight size={14}></IconArrowRight>
-                        </div>
-                        <img src={it} alt="" />
-                      </div>
-                    ))}
-                  </Carousel>
-                </div>
-              ) : (
-                <div className="cover">
-                  <img src={item.picture_url} alt="" />
-                  <div className="icon" onClick={(event) => wishList(event, item)}>
-                    <IconLoveImage></IconLoveImage>
-                  </div>
-                </div>
-              )}
-
+              {!!item?.picture_urls?.length ? silderComponent(item) : defauleComponents(item)}
               <div className="desc">
                 <div className="left">{item.verify_info.messages.join("·")}</div>
                 <div className="right">

@@ -10,4 +10,5 @@ export const FooWrapper = styled.div`
   position: fixed;
   bottom: 0;
   border-top: 1px solid rgb(221, 221, 221);
+  z-index: 999;
 `;
