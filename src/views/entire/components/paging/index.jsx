@@ -25,7 +25,7 @@ const Paging = memo((props) => {
         </div>
 
         <div className="desc">
-          第{startCount} - {endCount} 个房源, 超过 {total} 个
+          第{startCount} - {endCount} 个房源,超过 {total} 个
         </div>
       </div>
     </PageIngWrapper>

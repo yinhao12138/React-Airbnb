@@ -21,6 +21,7 @@ export const entireSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchEntireList.fulfilled, (state, action) => {
+      // console.log("xx", action.payload.list);
       state.entireList = action.payload.list;
       state.total = action.payload.totalCount;
       state.loading = false;

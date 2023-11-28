@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
-import React, { memo, useState } from "react";
-import { RoomWrapper, ItemWrapper, WishModalWrapper, WishModalButtonWrapper, WishModalInputWrapper } from "./style";
+import React, { memo, useState, useRef } from "react";
+import { Carousel } from "antd";
+import { RoomWrapper, ItemWrapper, WishModalWrapper, WishModalButtonWrapper, WishModalInputWrapper, CarouselWrapper } from "./style";
 import IconLoveImage from "@/assets/svg/icon_love";
 import IconStart from "@/assets/svg/icon_start";
 import { useNavigate } from "react-router-dom";
+import IconArrowLeft from "@/assets/svg/icon-arrow-left";
+import IconArrowRight from "@/assets/svg/icon-arrow-right";
 
 const RoomItem = memo((props) => {
   const [wishModelStatus, setWishModelStatus] = useState(false);
@@ -15,12 +18,10 @@ const RoomItem = memo((props) => {
   const navigate = useNavigate();
 
   function goDetail(i) {
-    // console.log(i);
     navigate("/entire");
   }
 
   function wishList(e, i) {
-    e.stopPropagation();
     setWishModelStatus(true);
   }
 
@@ -44,18 +45,49 @@ const RoomItem = memo((props) => {
     setWishModalDisabled(true);
   }
 
+  const sliderRef = useRef(null);
+  function handleArrowMethod(e) {
+    // console.log(sliderRef.current.next);
+    console.log(sliderRef);
+    // sliderRef.current.next();
+    sliderRef.current.goTo(2, true);
+
+    // e ? sliderRef.current.prev() : sliderRef.current.next();
+    // sliderRef.current.prev();
+  }
+
   return (
     <RoomWrapper>
       {list.map((item) => {
         return (
           <ItemWrapper key={item.id} width={width}>
             <div className="inner" onClick={() => goDetail(item)}>
-              <div className="cover">
-                <img src={item.picture_url} alt="" />
-                <div className="icon" onClick={(event) => wishList(event, item)}>
-                  <IconLoveImage></IconLoveImage>
+              {/* entire展示轮播图 */}
+              {!!item?.picture_urls?.length ? (
+                <div>
+                  <Carousel dots={false} ref={sliderRef}>
+                    {item.picture_urls.map((it, index) => (
+                      <div className="cover" key={index}>
+                        <div className="arrowIcon left" onClick={() => handleArrowMethod(true)}>
+                          <IconArrowLeft size={14}></IconArrowLeft>
+                        </div>
+                        <div className="arrowIcon right" onClick={() => handleArrowMethod(false)}>
+                          <IconArrowRight size={14}></IconArrowRight>
+                        </div>
+                        <img src={it} alt="" />
+                      </div>
+                    ))}
+                  </Carousel>
                 </div>
-              </div>
+              ) : (
+                <div className="cover">
+                  <img src={item.picture_url} alt="" />
+                  <div className="icon" onClick={(event) => wishList(event, item)}>
+                    <IconLoveImage></IconLoveImage>
+                  </div>
+                </div>
+              )}
+
               <div className="desc">
                 <div className="left">{item.verify_info.messages.join("·")}</div>
                 <div className="right">

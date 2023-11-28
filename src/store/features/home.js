@@ -49,6 +49,7 @@ export const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchDisCountHomeList.fulfilled, (state, action) => {
       state.disCountInfo = action.payload;
+      console.log(state.disCountInfo);
     });
     builder.addCase(fetchPopularRecommendList.fulfilled, (state, action) => {
       state.popularRecommendInfo = action.payload;

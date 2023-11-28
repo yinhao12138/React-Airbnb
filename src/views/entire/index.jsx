@@ -22,10 +22,16 @@ const Entire = memo(() => {
   const dispatch = useDispatch();
 
   function changeCurrent(current) {
-    setEntireOffset(current - 1);
+    // 请求接口数据
+    const requestListCount = current - 1;
+    const offset = requestListCount * 20;
+    const size = (requestListCount + 1) * 20;
+    setEntireOffset(offset);
+    setEntireSize(size);
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0); //window 自动定位到顶部
     dispatch(fetchEntireList({ offset: entireOffset, size: entireSize }));
     return () => {};
   }, [entireOffset]);
