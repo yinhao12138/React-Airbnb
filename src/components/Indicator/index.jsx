@@ -6,9 +6,7 @@ const Indicator = memo((props) => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    console.log("selectIndex", selectIndex);
     const selectItemEl = scrollRef.current.children[selectIndex];
-    console.log(selectItemEl);
     const selectItemWidth = selectItemEl.clientWidth;
     const selectItemOffset = selectItemEl.offsetLeft;
 

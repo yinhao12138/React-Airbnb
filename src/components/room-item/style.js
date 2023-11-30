@@ -16,75 +16,6 @@ export const ItemWrapper = styled.div`
     cursor: pointer;
     width: 100%;
 
-    .slider {
-      position: relative;
-      cursor: pointer;
-
-      .control {
-        .arrowIcon {
-          color: wheat;
-          position: absolute;
-          width: 28%;
-          height: 100%;
-          top: 0;
-          z-index: 2;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          & :hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            color: black;
-            padding: 10px;
-            border-radius: 50%;
-          }
-        }
-
-        .left {
-          left: 0;
-          background: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
-          /* background-color: red; */
-          border-radius: 10px 0 0 10px;
-        }
-
-        .right {
-          right: 0;
-          background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
-          /* background-color: red; */
-          border-radius: 0 10px 10px 0;
-        }
-      }
-
-      .indicator {
-        position: absolute;
-        z-index: 9;
-        width: 30%;
-        left: 0;
-        right: 0;
-        bottom: 10px;
-        margin: 0 auto;
-
-        .item {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 20%;
-
-          .dot {
-            width: 6px;
-            height: 6px;
-            background-color: #fff;
-            border-radius: 50%;
-
-            &.active {
-              width: 8px;
-              height: 8px;
-            }
-          }
-        }
-      }
-    }
-
     .cover {
       position: relative;
       padding: 66.66% 8px 0;
@@ -180,7 +111,7 @@ export const WishModalInputWrapper = styled(Input)`
 export const CarouselWrapper = styled(Carousel)`
   img {
     border-radius: 10px;
-    height: 194px;
+    /* height: 194px; */
     overflow: hidden;
   }
 `;
