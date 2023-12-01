@@ -3,14 +3,19 @@ import PropTypes from "prop-types";
 import { ContentWrapper } from "./style";
 import SliderItem from "@/components/slider-item";
 import IconStart from "@/assets/svg/icon_start";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getDetailInfo } from "@/store/features/detail";
 
 const Content = memo((props) => {
   const { list } = props;
 
-  console.log(list);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  function goDetail(r) {
-    console.log(r);
+  function goDetail(l) {
+    dispatch(getDetailInfo(l));
+    navigate("/detail");
   }
 
   return (

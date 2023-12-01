@@ -42,7 +42,7 @@ const Entire = memo(() => {
       <FilterDate></FilterDate>
       {!!entireList.length && <Content list={entireList}></Content>}
       {!!entireList.length && (
-        <PagIng size={entireSize} entireOffset={entireOffset} total={total} changeCurrent={(current) => changeCurrent(current)}></PagIng>
+        <PagIng size={entireSize} entireOffset={entireOffset / 20} total={total} changeCurrent={(current) => changeCurrent(current)}></PagIng>
       )}
     </EntireWrapper>
   );

@@ -36,12 +36,12 @@ export const SliderWrapper = styled.div`
 
       .left {
         left: 0;
-        background: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+        background: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
       }
 
       .right {
         right: 0;
-        background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+        background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
       }
     }
 

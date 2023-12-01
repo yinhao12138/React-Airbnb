@@ -1,9 +1,6 @@
 import PropTypes from "prop-types";
-import React, { memo, useState, useRef } from "react";
-import { Carousel } from "antd";
+import React, { memo, useState } from "react";
 import { RoomWrapper, ItemWrapper, WishModalWrapper, WishModalButtonWrapper, WishModalInputWrapper, CarouselWrapper } from "./style";
-import classNames from "classnames";
-
 import IconLoveImage from "@/assets/svg/icon_love";
 import IconStart from "@/assets/svg/icon_start";
 import { useNavigate } from "react-router-dom";

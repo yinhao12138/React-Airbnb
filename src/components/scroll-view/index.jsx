@@ -24,6 +24,7 @@ const ScrollView = memo((props) => {
   function controlArrowBtn(status) {
     const newPosIndex = status ? posIndex + 1 : posIndex - 1;
     const newEl = scrollContentRef.current.children[newPosIndex]; //获取第二个盒子距离前面的偏移量
+
     const newElOffsetLeft = newEl.offsetLeft;
     scrollContentRef.current.style.transform = `translate(-${newElOffsetLeft}px)`;
     setPosIndex(newPosIndex);

@@ -12,7 +12,8 @@ const SliderItem = memo((props) => {
   const { sliderItem } = props;
 
   const sliderRef = useRef(null);
-  function handleArrowMethod(isNext = true) {
+  function handleArrowMethod(e, isNext = true) {
+    e.stopPropagation(); // <!-- 阻止事件冒泡 -->
     isNext ? sliderRef.current.prev() : sliderRef.current.next();
 
     let newIndex = isNext ? selectIndex + 1 : selectIndex - 1;
@@ -25,10 +26,10 @@ const SliderItem = memo((props) => {
     <SliderWrapper>
       <div className="slider">
         <div className="control">
-          <div className="arrowIcon left" onClick={() => handleArrowMethod(false)}>
+          <div className="arrowIcon left" onClick={(e) => handleArrowMethod(e, true)}>
             <IconArrowLeft size={14}></IconArrowLeft>
           </div>
-          <div className="arrowIcon right" onClick={() => handleArrowMethod(true)}>
+          <div className="arrowIcon right" onClick={(e) => handleArrowMethod(e, false)}>
             <IconArrowRight size={14}></IconArrowRight>
           </div>
         </div>

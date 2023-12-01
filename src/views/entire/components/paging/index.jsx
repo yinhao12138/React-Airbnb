@@ -10,6 +10,7 @@ const Paging = memo((props) => {
   }
   const current = entireOffset + 1;
   const startCount = entireOffset * 20 + 1;
+  console.log(entireOffset);
   const endCount = (entireOffset + 1) * 20;
 
   return (
