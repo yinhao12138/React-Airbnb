@@ -92,10 +92,11 @@ export const PictureWrapper = styled.div`
   }
 
   .show-btn {
+    cursor: pointer;
     position: absolute;
     z-index: 99;
-    right: 15px;
-    bottom: 15px;
+    left: 15px;
+    top: 15px;
     line-height: 22px;
     padding: 5px 15px;
     border-radius: 5px;

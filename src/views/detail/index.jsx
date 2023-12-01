@@ -17,7 +17,7 @@ const Detail = memo(() => {
 
   return (
     <DetailWrapper>
-      <Picture picture={detailInfo.picture_urls}></Picture>
+      {!!detailInfo.picture_urls?.length && <Picture picture={detailInfo.picture_urls} name={detailInfo.name}></Picture>}
       {/* <Info></Info> */}
     </DetailWrapper>
   );

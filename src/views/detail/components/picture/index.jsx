@@ -1,13 +1,20 @@
 import PropTypes from "prop-types";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { PictureWrapper } from "./style";
+import Browser from "../browser";
 
 const Picture = memo((props) => {
-  const { picture } = props;
+  const [showBrowser, setShowBrowser] = useState(true);
+
+  const { picture, name } = props;
 
   function seePicture(e) {
     e.stopPropagation(); // <!-- 阻止事件冒泡 -->
-    console.log("<!-- 阻止事件冒泡 -->");
+    setShowBrowser(true);
+  }
+
+  function closePicture(l) {
+    setShowBrowser(l);
   }
 
   return (
@@ -27,15 +34,19 @@ const Picture = memo((props) => {
           );
         })}
       </div>
-      <div className="show-btn" onClick={(e) => seePicture(e)}>
-        查看照片
-      </div>
+      {!showBrowser && (
+        <div className="show-btn" onClick={(e) => seePicture(e)}>
+          查看照片
+        </div>
+      )}
+      {showBrowser && <Browser pictureUrls={picture} infoName={name} closePicture={(e) => closePicture(e)}></Browser>}
     </PictureWrapper>
   );
 });
 
 Picture.propTypes = {
   picture: PropTypes.array,
+  name: PropTypes.string,
 };
 
 export default Picture;
