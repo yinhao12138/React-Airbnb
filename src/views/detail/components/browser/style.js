@@ -39,7 +39,7 @@ export const BrowserWrapper = styled.div`
         width: calc(100% - 54%);
         margin: 0 27%;
         position: absolute;
-        bottom: 40px;
+        bottom: 30px;
 
         img {
           width: 100%;

@@ -43,7 +43,7 @@ const Browser = memo((props) => {
     setAllIndex([...allPictureIndex]);
   }, [pictureUrls]);
 
-  function getOffsetLeft(isNext, selectIndex, allArray) {
+  function getOffsetLeft(selectIndex, allArray) {
     // 底部在第五个时滚动逻辑隐藏逻辑
     const fontList = allArray.slice(0, 3); //前面三个
     const afterList = allArray.slice(-3); //后面三个
@@ -72,14 +72,22 @@ const Browser = memo((props) => {
       sliderRef.current.prev();
       //展示底部img选中第几个逻辑
       const newIndex = imageIndex <= 0 ? pictureUrls.length - 1 : imageIndex - 1;
-      getOffsetLeft(isNext, newIndex, allIndex);
+      getOffsetLeft(newIndex, allIndex);
       setImageIndex(newIndex);
       return;
     }
     const newIndex = imageIndex >= pictureUrls.length - 1 ? 0 : imageIndex + 1;
-    getOffsetLeft(isNext, newIndex, allIndex);
+    getOffsetLeft(newIndex, allIndex);
     setImageIndex(newIndex);
     sliderRef.current.next();
+  }
+
+  function handleClickImage(e, i) {
+    // 通过图片拿到这个图片在数组里面的哪一个下标
+    const findIndex = pictureUrls.findIndex((it) => i === it);
+    getOffsetLeft(findIndex, allIndex);
+    setImageIndex(findIndex);
+    sliderRef.current.goTo(findIndex);
   }
 
   return (
@@ -125,7 +133,9 @@ const Browser = memo((props) => {
             {pictureUrls.map((it, index) => {
               return (
                 <div className="slider" key={it}>
-                  <div className={classNames("cover", { selectcover: imageIndex === index })}></div>
+                  <div
+                    className={classNames("cover", { selectcover: imageIndex === index })}
+                    onClick={(e, imageIndex) => handleClickImage(e, it)}></div>
                   <img src={it} alt="" id="imageId" />
                 </div>
               );
