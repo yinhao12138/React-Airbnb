@@ -14,100 +14,84 @@ export const BrowserWrapper = styled.div`
     box-sizing: border-box;
   }
 
-  .box {
-    width: 100%;
-    height: 650px;
+  .middle {
+    /* 200px 底部留白 */
+    height: calc(100% - 386px);
     display: flex;
-    justify-content: space-around;
 
-    .left {
-      color: white;
-      display: flex;
-      align-items: center;
-      margin-left: 20px;
+    .arrow {
+      width: 75px;
       position: relative;
 
-      .arrow {
+      > span {
+        color: white;
         position: absolute;
-        left: 0;
+        top: 50%;
       }
     }
 
     .content {
-      width: 90%;
+      width: 100%;
       overflow: hidden;
+      position: relative;
 
-      .image {
+      .slider {
+        width: calc(100% - 54%);
+        margin: 0 27%;
+        position: absolute;
+        bottom: 40px;
+
         img {
           width: 100%;
         }
       }
     }
-
-    .right {
-      display: flex;
-      align-items: center;
-      margin-right: 20px;
-      color: white;
-      position: relative;
-
-      .arrow {
-        position: absolute;
-        right: 0;
-      }
-    }
   }
 
   .bottom {
-    position: absolute;
-    left: 25%;
+    box-sizing: border-box;
+    margin: 0 75px;
     height: 100px;
-    background-color: pink;
-    width: 1118px;
+    font-size: 11px;
     overflow: hidden;
 
-    .slider-list {
-      height: 100%;
-      width: 1118px;
+    .content {
+      width: calc(100% - 54%);
+      margin: 5px 27% 0;
+      overflow: hidden;
+      transition: transform 300ms ease;
 
-      .number {
-        width: 100%;
+      .text {
         height: 20px;
+        line-height: 20px;
+        color: white;
         background-color: rgb(34, 34, 34);
         display: flex;
         justify-content: space-between;
-        font-size: 11px;
-        line-height: 20px;
-        color: white;
 
         .right {
           width: 90px;
-
-          .icon {
-            padding: 1px 0 0 5px;
-          }
         }
       }
 
-      .list {
+      .carousel {
         position: relative;
-        height: 67px;
-        margin-top: 13px;
         display: flex;
-        margin-left: -10px;
-        background-color: red;
+        margin: 10px 0 0 -11px;
+        transition: transform 300ms ease;
 
-        .image {
-          padding-left: 10px;
+        .slider {
+          padding-left: 11px;
 
           img {
-            width: 100px;
+            width: 106px;
+            height: 67px;
           }
           .cover {
+            width: 106px;
+            height: 67px;
             position: absolute;
             background-color: rgba(34, 34, 34, 0.5);
-            width: 100px;
-            height: 67px;
             opacity: 1 !important;
           }
 

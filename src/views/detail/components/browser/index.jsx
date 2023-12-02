@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { memo, useEffect, useRef, useState } from "react";
-import { BrowserWrapper } from "./style";
+import { BrowserWrapper, ContentWrapper } from "./style";
 import IconClose from "@/assets/svg/icon_close";
 import IconArrowLeft from "@/assets/svg/icon-arrow-left";
 import IconArrowRight from "@/assets/svg/icon-arrow-right";
@@ -10,7 +10,8 @@ import classNames from "classnames";
 
 const Browser = memo((props) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const [totalOffset, setTotalOffset] = useState(0); //偏移量
+  const [hideImageBtn, setHideImageBtn] = useState(false);
+  const [allIndex, setAllIndex] = useState([]);
 
   const { pictureUrls, closePicture, infoName } = props;
 
@@ -25,45 +26,58 @@ const Browser = memo((props) => {
     closePicture(l);
   }
 
-  function handleHideMethod() {
-    console.log("隐藏底部图片");
-  }
-
   const sliderRef = useRef();
-  const imageListRef = useRef();
-  const contentRef = useRef();
-  useEffect(() => {
-    const scrollWidth = imageListRef.current.scrollWidth; //一共可以滚动的长度
-    const clientWidth = imageListRef.current.clientWidth; //本身占据的宽度
-    const distance = scrollWidth - clientWidth;
-    setTotalOffset(distance);
+  const carouselRef = useRef();
+  const contentRef = useRef(); //获取底部dom
 
-    // // 获取中间图片可示div宽度
-    // const contentWidth = contentRef.current.clientWidth;
-    // console.log(contentWidth);
+  function handleHideMethod() {
+    setHideImageBtn(!hideImageBtn);
+    const imageId = document.getElementById("imageId"); //获取底部图片的高度
+    contentRef.current.style.transform = `translateY(${hideImageBtn ? 0 : imageId.height}px)`;
+  }
+  useEffect(() => {
+    // 获取所有图片长度的数组  图片遍历index是从0开始 length长度是从1开始
+    const allPictureIndex = pictureUrls.map((it, index) => {
+      return index;
+    });
+    setAllIndex([...allPictureIndex]);
   }, [pictureUrls]);
 
-  function getOffsetLeft(i) {
+  function getOffsetLeft(isNext, selectIndex, allArray) {
     // 底部在第五个时滚动逻辑隐藏逻辑
-    // const newIndex = i > 5 ? 1 : i;
-    const newEl = imageListRef.current.children[i]; //获取第二个盒子距离前面的偏移量
-    const newOffsetLeft = newEl.offsetLeft;
-    // console.log("--", newOffsetLeft);
-    imageListRef.current.style.transform = `translate(-${newOffsetLeft}px)`;
+    const fontList = allArray.slice(0, 3); //前面三个
+    const afterList = allArray.slice(-3); //后面三个
+
+    if (!fontList.includes(selectIndex) && !afterList.includes(selectIndex)) {
+      const newEl = carouselRef.current.children[selectIndex - 3]; //获取第四个盒子距离前面的偏移量
+      const newOffsetLeft = newEl.offsetLeft;
+      carouselRef.current.style.transform = `translateX(-${newOffsetLeft}px)`;
+    }
+
+    //点击右边最后一个边偏移量列表自动定位到第一个图片
+    if (!!selectIndex === false) {
+      carouselRef.current.style.transform = `translateX(-${0}px)`;
+    }
+
+    //点击左边偏移量列表自动定位到最后一个图片
+    if (selectIndex === allArray[allArray.length - 1]) {
+      const newEl = carouselRef.current.children[selectIndex - 6]; //减6是前五个和最后四个的不偏移
+      const newOffsetLeft = newEl.offsetLeft;
+      carouselRef.current.style.transform = `translateX(-${newOffsetLeft}px)`;
+    }
   }
 
   function controlArrowBtn(isNext = true) {
     if (isNext === true) {
       sliderRef.current.prev();
       //展示底部img选中第几个逻辑
-      const newIndex = imageIndex <= 0 ? pictureUrls.length : imageIndex - 1;
+      const newIndex = imageIndex <= 0 ? pictureUrls.length - 1 : imageIndex - 1;
+      getOffsetLeft(isNext, newIndex, allIndex);
       setImageIndex(newIndex);
-      // getOffsetLeft(newIndex);
       return;
     }
-    const newIndex = imageIndex >= pictureUrls.length ? 0 : imageIndex + 1;
-    console.log("newIndex", newIndex);
-    getOffsetLeft(newIndex);
+    const newIndex = imageIndex >= pictureUrls.length - 1 ? 0 : imageIndex + 1;
+    getOffsetLeft(isNext, newIndex, allIndex);
     setImageIndex(newIndex);
     sliderRef.current.next();
   }
@@ -73,48 +87,46 @@ const Browser = memo((props) => {
       <div className="top" onClick={(e) => topClose(false)}>
         <IconClose></IconClose>
       </div>
-      <div className="box">
-        <div className="left">
-          <div className="arrow" onClick={(e) => controlArrowBtn(true)}>
+
+      <div className="middle">
+        <div className="arrow">
+          <span onClick={(e) => controlArrowBtn(true)}>
             <IconArrowLeft size={60}></IconArrowLeft>
+          </span>
+        </div>
+        <div className="content">
+          <div className="slider">
+            <Carousel dots={false} ref={sliderRef} fade={true}>
+              {pictureUrls.map((it) => {
+                return <img src={it} key={it} alt="" />;
+              })}
+            </Carousel>
           </div>
         </div>
-        <div className="content" ref={contentRef}>
-          <Carousel dots={false} ref={sliderRef} fade={true}>
-            {pictureUrls.map((it) => {
-              return (
-                <div className="image" key={it}>
-                  <img src={it} alt="" />
-                </div>
-              );
-            })}
-          </Carousel>
-        </div>
-        <div className="right">
-          <div className="arrow" onClick={(e) => controlArrowBtn(false)}>
+        <div className="arrow">
+          <span onClick={(e) => controlArrowBtn(false)}>
             <IconArrowRight size={60}></IconArrowRight>
-          </div>
+          </span>
         </div>
       </div>
+
       <div className="bottom">
-        <div className="slider-list">
-          <div className="number">
-            <div className="left">
-              {imageIndex + 1}/{pictureUrls.length + 1}: {infoName} 图片 {imageIndex + 1}
+        <div className="content" ref={contentRef} id="contentId">
+          <div className="text">
+            <div>
+              {imageIndex + 1}/{pictureUrls.length}: {infoName} 图片 {imageIndex + 1}
             </div>
             <div className="right" onClick={(e) => handleHideMethod()}>
-              隐藏照片列表
-              <span className="icon">
-                <IconBelow></IconBelow>
-              </span>
+              {hideImageBtn ? "显示照片列表" : "隐藏照片列表"}
+              <IconBelow></IconBelow>
             </div>
           </div>
-          <div className="list" ref={imageListRef}>
+          <div className="carousel" ref={carouselRef}>
             {pictureUrls.map((it, index) => {
               return (
-                <div className="image" key={it}>
-                  {/* <div className={classNames("cover", { selectcover: imageIndex === index })}></div> */}
-                  <img src={it} alt="" />
+                <div className="slider" key={it}>
+                  <div className={classNames("cover", { selectcover: imageIndex === index })}></div>
+                  <img src={it} alt="" id="imageId" />
                 </div>
               );
             })}
