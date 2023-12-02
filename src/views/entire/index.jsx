@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { fetchEntireList } from "@/store/features/entire";
+import { headerConfigFixed } from "@/store/features/main";
 import { EntireWrapper } from "./style";
 import { Spin } from "antd";
 import FilterDate from "./components/filter-date";
@@ -20,6 +21,11 @@ const Entire = memo(() => {
   }, shallowEqual);
 
   const dispatch = useDispatch();
+
+  // 设置顶部样式
+  useEffect(() => {
+    dispatch(headerConfigFixed("fixed"));
+  }, [dispatch]);
 
   function changeCurrent(current) {
     // 请求接口数据

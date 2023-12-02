@@ -133,9 +133,7 @@ const Browser = memo((props) => {
             {pictureUrls.map((it, index) => {
               return (
                 <div className="slider" key={it}>
-                  <div
-                    className={classNames("cover", { selectcover: imageIndex === index })}
-                    onClick={(e, imageIndex) => handleClickImage(e, it)}></div>
+                  <div className={classNames("cover", { selectcover: imageIndex === index })} onClick={(e) => handleClickImage(e, it)}></div>
                   <img src={it} alt="" id="imageId" />
                 </div>
               );

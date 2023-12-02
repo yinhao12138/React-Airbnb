@@ -15,8 +15,8 @@ export const BrowserWrapper = styled.div`
   }
 
   .middle {
-    /* 200px 底部留白 */
-    height: calc(100% - 386px);
+    /* 300px 底部留白 */
+    height: calc(100% - 486px);
     display: flex;
 
     .arrow {
@@ -33,13 +33,10 @@ export const BrowserWrapper = styled.div`
     .content {
       width: 100%;
       overflow: hidden;
-      position: relative;
 
       .slider {
         width: calc(100% - 54%);
         margin: 0 27%;
-        position: absolute;
-        bottom: 30px;
 
         img {
           width: 100%;

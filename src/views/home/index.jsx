@@ -11,6 +11,7 @@ import {
   fetchPlusInfoList,
   changeGoodPriceInfo,
 } from "@/store/features/home";
+import { headerConfigFixed } from "@/store/features/main";
 import SectionHeader from "./components/section-header";
 import SectionTabsTabs from "./components/section-tabs";
 import RoomItem from "../../components/room-item";
@@ -39,6 +40,9 @@ const Home = memo(() => {
     dispatch(fetchHeightHomeList());
     dispatch(fetchLongForList());
     dispatch(fetchPlusInfoList());
+
+    // 设置顶部样式
+    dispatch(headerConfigFixed("fixed"));
 
     return () => {};
   }, [dispatch]);

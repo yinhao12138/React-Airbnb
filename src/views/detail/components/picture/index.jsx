@@ -4,7 +4,7 @@ import { PictureWrapper } from "./style";
 import Browser from "../browser";
 
 const Picture = memo((props) => {
-  const [showBrowser, setShowBrowser] = useState(true);
+  const [showBrowser, setShowBrowser] = useState(false);
 
   const { picture, name } = props;
 
