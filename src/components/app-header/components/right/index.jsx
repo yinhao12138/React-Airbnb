@@ -44,11 +44,9 @@ const HeaderRight = memo(() => {
         <IconProfileAvatar></IconProfileAvatar>
         {showPopUp && (
           <div className="popUp">
-            <div className="top topBorder">
+            <div className="bottom">
               <div>注册</div>
               <div>登陆</div>
-            </div>
-            <div className="bottom">
               <div>出租房源</div>
               <div>开展体验</div>
               <div>帮助</div>

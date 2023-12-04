@@ -37,12 +37,12 @@ export const RightWrapper = styled.div`
       right: 1px;
       position: absolute;
       width: 200px;
-      /* height: 180px; */
+
       background-color: #fff;
+
       border-radius: 15px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 
-      .top,
       .bottom {
         padding-top: 12px;
 
@@ -56,10 +56,6 @@ export const RightWrapper = styled.div`
             background-color: #efefed;
           }
         }
-      }
-
-      .top {
-        border-bottom: 1px solid #999;
       }
     }
   }

@@ -5,7 +5,7 @@ export const FilterDateWrapper = styled.div`
   display: flex;
   position: fixed;
   background-color: white;
-  z-index: 999;
+  z-index: 8;
   height: 50px;
 
   .item {

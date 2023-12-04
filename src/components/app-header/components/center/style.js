@@ -5,6 +5,7 @@ export const CenterWrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 48px;
+  /* background-color: red; */
 
   .search-bar {
     position: absolute;

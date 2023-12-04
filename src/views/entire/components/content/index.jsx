@@ -13,7 +13,7 @@ const Content = memo((props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function goDetail(l) {
+  function goDetail(e, l) {
     dispatch(getDetailInfo(l));
     navigate("/detail");
   }
@@ -25,7 +25,7 @@ const Content = memo((props) => {
         {list.map((item) => {
           return (
             <div key={item.id} className="content">
-              <div className="inner" onClick={() => goDetail(item)}>
+              <div className="inner" onClick={(e) => goDetail(e, item)}>
                 <SliderItem sliderItem={item.picture_urls}></SliderItem>
                 <div className="desc">
                   <div className="left">{item.verify_info.messages.join("·")}</div>
