@@ -9,7 +9,6 @@ const routes = [
   {
     path: "/",
     element: <Navigate to="/entire"></Navigate>,
-    // element: <Navigate to="/home"></Navigate>,
   },
   {
     path: "/home",
