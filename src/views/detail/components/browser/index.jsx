@@ -61,7 +61,7 @@ const Browser = memo((props) => {
 
     //点击左边偏移量列表自动定位到最后一个图片
     if (selectIndex === allArray[allArray.length - 1]) {
-      const newEl = carouselRef.current.children[selectIndex - 6]; //减6是前五个和最后四个的不偏移
+      const newEl = carouselRef.current.children[selectIndex - 6]; //减6是前三个和最后是三个的不偏移
       const newOffsetLeft = newEl.offsetLeft;
       carouselRef.current.style.transform = `translateX(-${newOffsetLeft}px)`;
     }
