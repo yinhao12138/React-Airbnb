@@ -1,7 +1,6 @@
-### `npm test`
+### `npm dev`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- 本地启动 -->
 
 ### `版本`
 node v18.16.0
